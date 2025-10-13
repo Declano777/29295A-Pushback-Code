@@ -30,13 +30,13 @@ public:
     HoldButton L2_;
 
     ToggleButton A_;
-    ToggleButton B_;
-    ToggleButton X_;
-    ToggleButton Y_;
+    TapButton B_;
+    TapButton X_;
+    TapButton Y_;
 
     TapButton Up_;
     TapButton Down_;
-    HoldButton Left_;
+    TapButton Left_;
     TapButton Right_;
 
 public:

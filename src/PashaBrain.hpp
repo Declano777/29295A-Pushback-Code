@@ -13,8 +13,11 @@ private:
     PashaController Controller_;
 
     //piston boolean values
-    bool TrapDoorOn_ = false;
+    //bool TrapDoorOn_ = false;
     bool DeScoreOn_ = false;
+    bool DoubleParkOn_ = false;
+    bool WingsOn_ = false;
+    bool MatchLoadOn_ = false;
     //arm timer 
     /*
     int ZeroTimer = 0;
@@ -52,28 +55,33 @@ public:
         //
 
         if (Controller_.R2_.IsPressed()) {
-            Robot_->S_Roller_.Forward();
+            Robot_->Intake_.Forward();
+        }
+        else if (Controller_.R1_.IsPressed()) {
+            Robot_->Intake_.M_Forward();
         }
         else if (Controller_.L2_.IsPressed()) {
-            Robot_->S_Roller_.Reverse();
+            Robot_->Intake_.Reverse();
         }
         else {
-            Robot_->S_Roller_.Stop();
+            Robot_->Intake_.Stop();
         }
 
-        if (Controller_.Y_.IsOn()) {
-            Robot_->S_Roller_.SortOn();
+        if (Controller_.X_.WasTapped()) {
+            Robot_->TrapDoor_.SortOn();
         }
         else {
-            Robot_->S_Roller_.SortOff();
+            Robot_->TrapDoor_.SortOff();
         }
 
+        #pragma region Arm Control - Disabled
         //
         //arm
         //
-        #pragma region Arm Control - Disabled
+        /*
+        
         if (Controller_.Left_.IsPressed()) {
-            /*ZeroTimer++;
+            ZeroTimer++;
 
             if (ZeroTimer > 50) {
                 Robot_->Arm_.Zero();
@@ -82,7 +90,7 @@ public:
 
                 Controller_.L1_.SetPressed(0);
                 Robot_->Arm_.SetTarget((Arm::State)(Controller_.L1_.TimesPressed() % 4)); 
-            } */
+            } 
         }
 
         if (Controller_.Down_.WasTapped()) { /*
@@ -96,7 +104,7 @@ public:
                 DownPressedAmount++;
             } else {
                 Robot_->Arm_.MoveDown();
-            } */
+            } 
         }
 
         if (Controller_.Up_.WasTapped()) { /*
@@ -104,7 +112,7 @@ public:
                 Robot_->Arm_.SetTarget((Arm::State)(Robot_->Arm_.GetState() - 1));
                 DownPressedAmount--;
             } else {
-                Robot_->Arm_.MoveUp(); */
+                Robot_->Arm_.MoveUp(); 
             }
         }
 
@@ -117,7 +125,7 @@ public:
             }
 
             Robot_->Arm_.SetTarget((Arm::State)(Controller_.L1_.TimesPressed() % 4));
-            Robot_->Arm_.ManualTakeoverSet(false); */
+            Robot_->Arm_.ManualTakeoverSet(false); 
         }
 
         if (Controller_.L1_.IsHeld()) { /*
@@ -125,7 +133,7 @@ public:
             Robot_->Arm_.ManualTakeoverSet(false);
             Robot_->Intake_.SetHookBrakeCoast();
         } else {
-            Robot_->Intake_.SetHookBrakeBrake(); */
+            Robot_->Intake_.SetHookBrakeBrake(); 
         }
 
         if (Controller_.X_.WasTapped()) { /*
@@ -163,20 +171,29 @@ public:
         //
         //pistons
         //
-        if (Controller_.A_.WasTapped()) {
-            DescoreOn_ = !DescoreOn_;
-        }
         if (Controller_.B_.WasTapped()) {
-            TrapDoorOn_ = !TrapDoorOn_;
+            DeScoreOn_ = !DeScoreOn_;
         }
-        if (Controller_.X_.WasTapped()) {
-            Robot_->HalfSpeed = !Robot_->HalfSpeed;
+        if (Controller_.Y_.WasTapped()) {
+            WingsOn_ = !WingsOn_;
+        }
+        if (Controller_.Left_.WasTapped()) {
+            MatchLoadOn_ = !MatchLoadOn_;
+        }
+        if (Controller_.Down_.WasTapped()) {
+            DoubleParkOn_ = !DoubleParkOn_;
+        }
+        if (Controller_.Right_.WasTapped()) {
+            Robot_->TrapDoor_.Toggle(); // for manual control of colour sort 
+        }
+        if (Controller_.Up_.WasTapped()) {
+            Robot_->HalfSpeed = !Robot_->HalfSpeed; // if we need half speed for some reason
             Controller_.Vibrate();
         }
 
-        Robot_->TrapDoor_.SetValue(TrapDoorOn_);
-        Robot_->DeScore_.SetValue(DoinkerOn_);
-        //outputs
+        Robot_->Wings_.SetValue(WingsOn_);
+        Robot_->Descore_.SetValue(DeScoreOn_);
+        Robot_->DoublePark_.SetValue(DoubleParkOn_);
         Robot_->OutputTick();
     }
 };

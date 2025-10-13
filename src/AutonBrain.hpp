@@ -2,7 +2,6 @@
 #define AUTONBRAIN_HPP
 
 #include "Robot.hpp"
-#include "Basic Control Classes/LimitSwitch.hpp"
 
 class AutonBrain
 {
@@ -10,23 +9,23 @@ class AutonBrain
 private:
 
     Robot* Robot_;
-    LimitSwitch LimSwitch_;
    
 public:
     AutonBrain(Robot* Robot)
-        : Robot_(Robot), LimSwitch_('C')
+        : Robot_(Robot)
     {
 
     }
 
     bool intakeOn = false;
     bool descoreOn = false;
-    bool trapDoorOn = false;
+    bool matchLoadOn = false;
+    bool doubleParkOn = false;
+    bool wingsOn = false;
     bool rollerOnly = false;
 
     void Tick()
     {
-        LimSwitch_.Tick();
         Robot_->InputTick();
 
         if (intakeOn) {
@@ -46,16 +45,27 @@ public:
         else {
             Robot_->Descore_.Deactivate();
         }
-
-        if (trapDoorOn) {
-            Robot_->TrapDoor_.Activate();
+        if (matchLoadOn) {
+            Robot_->MatchLoad_.Activate();
         }
         else {
-            Robot_->TrapDoor_.Deactivate();
+            Robot_->MatchLoad_.Deactivate();
+        }
+         if (wingsOn) {
+            Robot_->Wings_.Activate();
+        }
+        else {
+            Robot_->Wings_.Deactivate();
+        }
+        if (doubleParkOn) {
+            Robot_->DoublePark_.Activate();
+        }
+        else {
+            Robot_->DoublePark_.Deactivate();
         }
         Robot_->AutonOutputTick();
     }
-
+    
     void SetAllianceAsRed(bool isRed) {
         Robot_->SetAllianceAsRed(isRed);
     }

@@ -13,7 +13,8 @@ private:
 
     bool badColour = false;
 
-    int reverseTimer = 0;
+    int trapDoorTimer = 0;
+    int delayTime = 23;
 
     OpticalSensor OpticalSensor_;
     DistanceSensor DistanceSensor_;
@@ -30,7 +31,7 @@ public:
 
         if (!colourSort) return;
 
-        if (DistanceSensor_.GetDistance() < 10 && reverseTimer < 0) {
+        if (DistanceSensor_.GetDistance() < 10 && trapDoorTimer < 0) {
             block = OpticalSensor_.GetBlock();
             switch (block)
             {
@@ -46,11 +47,11 @@ public:
             }
 
             if (badColour) {
-                reverseTimer = 23;
+                trapDoorTimer = delayTime;
             }
             block = OpticalSensor::BlockType::None;
         }        
-        reverseTimer--;
+        trapDoorTimer--;
     }
 
     void SortOn() {
@@ -62,8 +63,8 @@ public:
         OpticalSensor_.LEDoff();
     }
 
-    int GetReverseTimer() {
-        return reverseTimer;
+    int GetTrapDoorTimer() {
+        return trapDoorTimer;
     }
 
     void SetAllianceAsRed(bool isRed) {

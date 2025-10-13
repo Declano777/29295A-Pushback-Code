@@ -12,8 +12,6 @@ private:
     Motor S_Roller_;
     Motor Hood_;
 
-    BlockDetector BlockDetector_;
-
     int PreRollerSpeed_;
     int S_RollerSpeed_;
     int HoodSpeed_;
@@ -27,7 +25,7 @@ public:
     }
 
     void InputTick() {
-        BlockDetector_.Tick();
+       // BlockDetector_.Tick();
         S_Roller_.Tick();
     }
 
@@ -51,11 +49,18 @@ public:
         HoodSpeed_ = -maxSpeed;
     }
 
-    void S_RollerReverse()
+    void M_Forward()
+    {
+        PreRollerSpeed_ = maxSpeed;
+        S_RollerSpeed_ = maxSpeed;
+        HoodSpeed_ = -maxSpeed;
+    }
+
+    void M_Reverse()
     {
         PreRollerSpeed_ = -maxSpeed;
         S_RollerSpeed_ = -maxSpeed;
-        HoodSpeed_ = -maxSpeed;
+        HoodSpeed_ = maxSpeed;
     }
 
     void PreRollForward()
@@ -64,7 +69,6 @@ public:
         S_RollerSpeed_ = 0;
         HoodSpeed_ = 0;
     }
-
     void PreRollReverse()
     {
         PreRollerSpeed_ = -maxSpeed;
@@ -92,18 +96,6 @@ public:
         void ChangeHoodSpeed(int speed)
     {
         HoodSpeed_ = speed;
-    }
-
-    void SortOn() {
-        BlockDetector_.SortOn();
-    }
-
-    void SortOff() {
-        BlockDetector_.SortOff();
-    }
-
-    void SetAllianceAsRed(bool isRed) {
-        BlockDetector_.SetAllianceAsRed(isRed);
     }
 
     void SetS_RollerBrakeBrake() {

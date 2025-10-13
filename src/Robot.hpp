@@ -5,6 +5,7 @@
 
 #include "Basic Control Classes/Piston.hpp"
 #include "Intake.hpp"
+#include "TrapDoor.hpp"
 #include "DriveTrainJoystickMath.hpp"
 
 class Robot
@@ -12,45 +13,54 @@ class Robot
 
 public:
     Pistonf Descore_;
-    Pistonf TrapDoor_;
+    Pistonf DoublePark_;
+    Pistonf Wings_;
+    Pistonf MatchLoad_;
+    TrapDoor TrapDoor_;
 
     Intake Intake_;
 
     DriveTrainCurveJoystickMath DriveTrain_;
 
     bool IsAutonomous = false;
-
     bool HalfSpeed = false;
 
 public:
     Robot()
         : Descore_('A'),
-          TrapDoor_('B'),
-          Intake_(Motor(11), Motor(12), Motor(13)),
+          DoublePark_('C'),
+          Wings_('D'),
+          MatchLoad_('E'),
+          TrapDoor_(Pistonf('F')),
+          Intake_(Motor(13), Motor(14), Motor(-15)),
           DriveTrain_()
+          //optical in 19, distance in 17
 
     {
-        Intake_.SortOn();
+        TrapDoor_.SortOn();
     }
 
     void InputTick()
     {
         Intake_.InputTick();
+        TrapDoor_.InputTick();
         DriveTrain_.SetHalfSpeedValue(HalfSpeed);
         DriveTrain_.InputTick();
     }
 
     void OutputTick() {
         Intake_.OutputTick();
+        TrapDoor_.OutputTick();
         DriveTrain_.OutputTick();
     }
 
     void AutonOutputTick() {
         Intake_.OutputTick();
+        TrapDoor_.OutputTick();
     }
 
     void SetAllianceAsRed(bool isRed) {
-        Intake_.SetAllianceAsRed(isRed);
+        TrapDoor_.SetAllianceAsRed(isRed);
     }
 };
 

@@ -45,11 +45,11 @@ enum class DeviceType {
 	motor = 2, ///< A motor is plugged into the port
 	rotation = 4, ///< A rotation sensor is plugged into the port
 	imu = 6, ///< An inertial sensor is plugged into the port
-	distance = 7, ///< A distance sensor is plugged into the port
+	distance = 17, ///< A distance sensor is plugged into the port
 	radio = 8, ///< A radio is plugged into the port
 	vision = 11, ///< A vision sensor is plugged into the port
 	adi = 12, ///< This port is an ADI expander
-	optical = 16, ///< An optical sensor is plugged into the port
+	optical = 19, ///< An optical sensor is plugged into the port
 	gps = 20, ///< A GPS sensor is plugged into the port
 	serial = 129, ///< A serial device is plugged into the port
 	undefined = 255 ///< The device type is not defined, or is not a valid device
