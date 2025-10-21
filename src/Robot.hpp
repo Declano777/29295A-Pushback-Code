@@ -32,7 +32,7 @@ public:
           Wings_('D'),
           MatchLoad_('E'),
           TrapDoor_(Pistonf('F')),
-          Intake_(Motor(13), Motor(14), Motor(-15)),
+          Intake_(Motor(12), Motor(14), Motor(-15)),
           DriveTrain_()
           //optical in 19, distance in 17
 

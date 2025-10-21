@@ -389,6 +389,32 @@ void brainTick() {
   }
 }
 
+void testAuton() {
+  Drive* ch = &robot->DriveTrain_.DriveTrain_.Chassis_;
+  robot->IsAutonomous = true;
+  brain = new AutonBrain(robot);
+  pros::Task tickTask(brainTick);
+  brain->SetAllianceAsRed(true);
+  ch->slew_drive_set(true);
+
+  DRIVE_SPEED = 60;
+
+  ch->pid_drive_set(20, DRIVE_SPEED);
+  brain->intakeOn = true;
+  ch->pid_wait();
+  pros::delay(400);
+
+
+  ch->pid_drive_set(-10, DRIVE_SPEED);
+  ch->pid_wait();
+
+  pros::delay(200);
+  ch->pid_drive_set(10, DRIVE_SPEED);
+  ch->pid_wait();
+
+  pros::delay(500);
+  ch->pid_drive_set(-20, DRIVE_SPEED);
+}
 // . . .
 // Make your own autonomous functions here!
 // . . .

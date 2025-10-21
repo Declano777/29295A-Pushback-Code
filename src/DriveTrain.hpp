@@ -20,27 +20,27 @@ public:
 private:
     void default_constants() {
         // P, I, D, and Start I
-        Chassis_.pid_drive_constants_set(137.0, 0.0, 80.0);         // Fwd/rev constants, used for odom and non odom motions
+        Chassis_.pid_drive_constants_set(137.0, 0.0, 80.0);         // Fwd/rev constants, used for odom and non odom motions, (may split into two?)
         Chassis_.pid_heading_constants_set(10, 0.0, 45);        // Holds the robot straight while going forward without odom
         Chassis_.pid_turn_constants_set(5.0, 0.0, 30.5, 0.0);     // Turn in place constants
-        Chassis_.pid_swing_constants_set(6.0, 0.0, 65.0);      //6.0 , 0.0, 65,0     // Swing constants
-        Chassis_.pid_odom_angular_constants_set(6.5, 0.0, 52.5);    // Angular control for odom motions
-        Chassis_.pid_odom_boomerang_constants_set(5.8, 0.0, 32.5);  // Angular control for boomerang motions
+        Chassis_.pid_swing_constants_set(6.0, 0.0, 65.0);      //6.0 , 0.0, 65,0     // Swing constants (Probably keep)
+        Chassis_.pid_odom_angular_constants_set(6.5, 0.0, 52.5);    // Angular control for odom motions (Probably keep)
+        Chassis_.pid_odom_boomerang_constants_set(5.8, 0.0, 32.5);  // Angular control for boomerang motions (Probably keep)
 
         // Exit conditions
-        Chassis_.pid_turn_exit_condition_set(90_ms, 3_deg, 250_ms, 7_deg, 500_ms, 500_ms);
-        Chassis_.pid_swing_exit_condition_set(90_ms, 3_deg, 250_ms, 7_deg, 500_ms, 500_ms);
-        Chassis_.pid_drive_exit_condition_set(90_ms, 1_in, 250_ms, 3_in, 500_ms, 500_ms);
-        Chassis_.pid_odom_turn_exit_condition_set(90_ms, 3_deg, 250_ms, 7_deg, 500_ms, 750_ms);
-        Chassis_.pid_odom_drive_exit_condition_set(90_ms, 1_in, 250_ms, 3_in, 500_ms, 750_ms);
-        Chassis_.pid_turn_chain_constant_set(3_deg);
-        Chassis_.pid_swing_chain_constant_set(5_deg);
-        Chassis_.pid_drive_chain_constant_set(3_in);
+        Chassis_.pid_turn_exit_condition_set(90_ms, 3_deg, 250_ms, 7_deg, 500_ms, 500_ms); //first num
+        Chassis_.pid_swing_exit_condition_set(90_ms, 3_deg, 250_ms, 7_deg, 500_ms, 500_ms); //first num
+        Chassis_.pid_drive_exit_condition_set(90_ms, 1_in, 250_ms, 3_in, 500_ms, 500_ms); //first num
+        Chassis_.pid_odom_turn_exit_condition_set(90_ms, 3_deg, 250_ms, 7_deg, 500_ms, 750_ms); //first num
+        Chassis_.pid_odom_drive_exit_condition_set(90_ms, 1_in, 250_ms, 3_in, 500_ms, 750_ms); //first num
+        Chassis_.pid_turn_chain_constant_set(3_deg);//change? 
+        Chassis_.pid_swing_chain_constant_set(5_deg); //change
+        Chassis_.pid_drive_chain_constant_set(3_in);  //change?
 
         // Slew constants
-        Chassis_.slew_turn_constants_set(3_deg, 70);
-        Chassis_.slew_drive_constants_set(3_in, 70);
-        Chassis_.slew_swing_constants_set(3_in, 80);
+        Chassis_.slew_turn_constants_set(3_deg, 70); //change
+        Chassis_.slew_drive_constants_set(3_in, 70); //change
+        Chassis_.slew_swing_constants_set(3_in, 80); //change
 
         // The amount that turns are prioritized over driving in odom motions
         // - if you have tracking wheels, you can run this higher.  1.0 is the max
@@ -58,8 +58,8 @@ public:
     DriveTrain()
         :Chassis_(
             // These are your drive motors, the first motor is used for sensing!
-            { -1, -8, -3},     // Left Chassis Ports (negative port will reverse it!)
-            { 5, 6, 7},  // Right Chassis Ports (negative port will reverse it!)
+            { -1, -6, -3},     // Left Chassis Ports (negative port will reverse it!)
+            { 5, 9, 7},  // Right Chassis Ports (negative port will reverse it!)
 
             4,      // IMU Port
             3.25,  // Wheel Diameter (Remember, 4" wheels without screw holes are actually 4.125!)

@@ -5,7 +5,7 @@
 
 class Pistonf {
 private:
-    pros::ADIDigitalOut Port_;
+    pros::adi::DigitalOut Port_;
     bool State_;
 
 public:

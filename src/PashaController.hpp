@@ -31,7 +31,7 @@ public:
 
     ToggleButton A_;
     TapButton B_;
-    TapButton X_;
+    ToggleButton X_;
     TapButton Y_;
 
     TapButton Up_;

@@ -22,14 +22,14 @@ public:
     bool matchLoadOn = false;
     bool doubleParkOn = false;
     bool wingsOn = false;
-    bool rollerOnly = false;
+    bool prerollerOnly = false;
 
     void Tick()
     {
         Robot_->InputTick();
 
         if (intakeOn) {
-            if(rollerOnly) {
+            if(prerollerOnly) {
                 Robot_->Intake_.PreRollForward();
             }
             else {

@@ -66,8 +66,10 @@ public:
         else {
             Robot_->Intake_.Stop();
         }
-
-        if (Controller_.X_.WasTapped()) {
+        if (Controller_.L1_.WasTapped()) {
+            MatchLoadOn_ = !MatchLoadOn_; 
+        }
+        if (Controller_.X_.IsOn()) {
             Robot_->TrapDoor_.SortOn();
         }
         else {
@@ -176,9 +178,6 @@ public:
         }
         if (Controller_.Y_.WasTapped()) {
             WingsOn_ = !WingsOn_;
-        }
-        if (Controller_.Left_.WasTapped()) {
-            MatchLoadOn_ = !MatchLoadOn_;
         }
         if (Controller_.Down_.WasTapped()) {
             DoubleParkOn_ = !DoubleParkOn_;
