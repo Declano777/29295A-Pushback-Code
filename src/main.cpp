@@ -40,7 +40,7 @@ void initialize() {
 ez::as::auton_selector.autons_add({
 
 // autons will go here
-
+{"Test Auton", testAuton}
    });
   // Look at your horizontal tracking wheel and decide if it's in front of the midline of your robot or behind it
   //  - change `back` to `front` if the tracking wheel is in front of the midline

@@ -1,6 +1,7 @@
 #pragma once
 
 void default_constants();
+void testAuton(); //foward and back
 
 void drive_example();
 void turn_example();
