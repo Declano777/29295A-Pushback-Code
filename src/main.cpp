@@ -31,6 +31,7 @@ Robot* robot;
  * All other competition modes are blocked by initialize; it is recommended
  * to keep execution time for this mode under a few seconds.
  */
+
 void initialize() {
   // Print our branding over your terminal :D
   ez::ez_template_print();
@@ -40,8 +41,9 @@ void initialize() {
 ez::as::auton_selector.autons_add({
 
 // autons will go here
-{"Test Auton", testAuton}
+{"Test Auton", testAuton},
    });
+
   // Look at your horizontal tracking wheel and decide if it's in front of the midline of your robot or behind it
   //  - change `back` to `front` if the tracking wheel is in front of the midline
   //  - ignore this if you aren't using a horizontal tracker

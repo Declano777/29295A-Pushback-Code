@@ -7,7 +7,7 @@
 /////
 
 // These are out of 127
-int DRIVE_SPEED = 110;
+int DRIVE_SPEED = 95;
 int TURN_SPEED = 90;
 const int SWING_SPEED = 110;
 #pragma region PID mush
@@ -400,7 +400,7 @@ void testAuton() {
   DRIVE_SPEED = 60;
 
   ch->pid_drive_set(20, DRIVE_SPEED);
-  brain->intakeOn = true;
+  //brain->intakeOn = true;
   ch->pid_wait();
   pros::delay(400);
 

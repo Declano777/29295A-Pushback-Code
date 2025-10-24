@@ -18,6 +18,7 @@ private:
     bool DoubleParkOn_ = false;
     bool WingsOn_ = false;
     bool MatchLoadOn_ = false;
+    bool  prerollerOnly_ = false;
     //arm timer 
     /*
     int ZeroTimer = 0;
@@ -53,7 +54,9 @@ public:
         //
         //intake
         //
-
+        if (Controller_.Right_.IsPressed()) {
+            Robot_->Intake_.PreRollForward();
+        }
         if (Controller_.R2_.IsPressed()) {
             Robot_->Intake_.Forward();
         }
@@ -181,10 +184,10 @@ public:
         }
         if (Controller_.Down_.WasTapped()) {
             DoubleParkOn_ = !DoubleParkOn_;
-        }
+        }/*
         if (Controller_.Right_.WasTapped()) {
             Robot_->TrapDoor_.Toggle(); // for manual control of colour sort 
-        }
+        } */
         if (Controller_.Up_.WasTapped()) {
             Robot_->HalfSpeed = !Robot_->HalfSpeed; // if we need half speed for some reason
             Controller_.Vibrate();

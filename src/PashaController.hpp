@@ -37,7 +37,7 @@ public:
     TapButton Up_;
     TapButton Down_;
     TapButton Left_;
-    TapButton Right_;
+    HoldButton Right_;
 
 public:
     PashaController() :

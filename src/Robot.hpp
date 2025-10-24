@@ -28,9 +28,9 @@ public:
 public:
     Robot()
         : Descore_('A'),
-          DoublePark_('C'),
+          DoublePark_('B'),
+          MatchLoad_('C'),
           Wings_('D'),
-          MatchLoad_('E'),
           TrapDoor_(Pistonf('F')),
           Intake_(Motor(12), Motor(14), Motor(-15)),
           DriveTrain_()
