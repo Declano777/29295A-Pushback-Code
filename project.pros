@@ -425,7 +425,8 @@
     },
     "upload_options": {
       "description": "First version of robot code for 29295A Pushback",
-      "icon": "robot"
+      "icon": "ufo",
+      "slot": 2
     },
     "use_early_access": false
   }

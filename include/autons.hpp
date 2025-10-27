@@ -2,6 +2,8 @@
 
 void default_constants();
 void testAuton(); //foward and back
+void driveAuton(); //forward, back, turn
+void turnAuton(); //turning only
 
 void drive_example();
 void turn_example();

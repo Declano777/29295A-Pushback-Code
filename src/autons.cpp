@@ -7,7 +7,7 @@
 /////
 
 // These are out of 127
-int DRIVE_SPEED = 110;
+int DRIVE_SPEED =110;
 int TURN_SPEED = 90;
 const int SWING_SPEED = 110;
 #pragma region PID mush
@@ -388,7 +388,7 @@ void brainTick() {
     pros::delay(ez::util::DELAY_TIME);
   }
 }
-
+/*
 void testAuton() {
   Drive* ch = &robot->DriveTrain_.DriveTrain_.Chassis_;
   robot->IsAutonomous = true;
@@ -400,7 +400,6 @@ void testAuton() {
   DRIVE_SPEED = 60;
 
   ch->pid_drive_set(20, DRIVE_SPEED);
-  brain->intakeOn = true;
   ch->pid_wait();
   pros::delay(400);
 
@@ -415,6 +414,63 @@ void testAuton() {
   pros::delay(500);
   ch->pid_drive_set(-20, DRIVE_SPEED);
 }
+void driveAuton() {
+  Drive* ch = &robot->DriveTrain_.DriveTrain_.Chassis_;
+  robot->IsAutonomous = true;
+  brain = new AutonBrain(robot);
+  pros::Task tickTask(brainTick);
+  brain->SetAllianceAsRed(true);
+  ch->slew_drive_set(true);
+
+  DRIVE_SPEED = 60;
+  TURN_SPEED = 60;
+
+  ch->pid_drive_set(16, DRIVE_SPEED);
+  ch->pid_wait();
+  pros::delay(400);
+
+  ch->pid_turn_set(25, TURN_SPEED);
+  ch->pid_wait();
+  pros::delay(300);
+
+  ch->pid_turn_set(-45, TURN_SPEED);
+  ch->pid_wait();
+  pros::delay(200);
+
+  ch->pid_turn_set (0, TURN_SPEED);
+  ch->pid_wait();
+  pros::delay(200);
+
+  pros::delay(500);
+  ch->pid_drive_set(-16, DRIVE_SPEED);
+} */
+
+void turnAuton() {
+  Drive* ch = &robot->DriveTrain_.DriveTrain_.Chassis_;
+  robot->IsAutonomous = true;
+  brain = new AutonBrain(robot);
+  pros::Task tickTask(brainTick);
+  brain->SetAllianceAsRed(true);
+  ch->slew_drive_set(true);
+
+  TURN_SPEED = 60;
+  DRIVE_SPEED = 60;
+
+  ch->pid_turn_set(35, TURN_SPEED);
+  ch->pid_wait();
+  pros::delay(300);
+
+  ch->pid_turn_set(-45, TURN_SPEED);
+  ch->pid_wait();
+  pros::delay(200);
+
+   ch->pid_turn_set(90, TURN_SPEED);
+  ch->pid_wait();
+  pros::delay(350);
+
+  ch->pid_turn_set (0, TURN_SPEED);
+  ch->pid_wait();
+} 
 // . . .
 // Make your own autonomous functions here!
 // . . .

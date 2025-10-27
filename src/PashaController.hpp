@@ -31,13 +31,13 @@ public:
 
     ToggleButton A_;
     TapButton B_;
-    ToggleButton X_;
+    TapButton X_;
     TapButton Y_;
 
     TapButton Up_;
     TapButton Down_;
     TapButton Left_;
-    TapButton Right_;
+    HoldButton Right_;
 
 public:
     PashaController() :

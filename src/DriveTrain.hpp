@@ -20,9 +20,9 @@ public:
 private:
     void default_constants() {
         // P, I, D, and Start I
-        Chassis_.pid_drive_constants_set(137.0, 0.0, 80.0);         // Fwd/rev constants, used for odom and non odom motions, (may split into two?)
-        Chassis_.pid_heading_constants_set(10, 0.0, 45);        // Holds the robot straight while going forward without odom
-        Chassis_.pid_turn_constants_set(5.0, 0.0, 30.5, 0.0);     // Turn in place constants
+        Chassis_.pid_drive_constants_set(12, 0.0, 95);         // Fwd/rev constants, used for odom and non odom motions, (may split into two?) 12 95
+        Chassis_.pid_heading_constants_set(13, 0.0, 83);        // Holds the robot straight while going forward without odom 13 83
+        Chassis_.pid_turn_constants_set(5, 0.0, 30, 0);     // Turn in place constants 5 30
         Chassis_.pid_swing_constants_set(6.0, 0.0, 65.0);      //6.0 , 0.0, 65,0     // Swing constants (Probably keep)
         Chassis_.pid_odom_angular_constants_set(6.5, 0.0, 52.5);    // Angular control for odom motions (Probably keep)
         Chassis_.pid_odom_boomerang_constants_set(5.8, 0.0, 32.5);  // Angular control for boomerang motions (Probably keep)
@@ -39,7 +39,7 @@ private:
 
         // Slew constants
         Chassis_.slew_turn_constants_set(3_deg, 70); //change
-        Chassis_.slew_drive_constants_set(3_in, 70); //change
+        Chassis_.slew_drive_constants_set(5_in, 70); //change
         Chassis_.slew_swing_constants_set(3_in, 80); //change
 
         // The amount that turns are prioritized over driving in odom motions
@@ -61,7 +61,7 @@ public:
             { -1, -6, -3},     // Left Chassis Ports (negative port will reverse it!)
             { 5, 9, 7},  // Right Chassis Ports (negative port will reverse it!)
 
-            4,      // IMU Port
+            10,      // IMU Port
             3.25,  // Wheel Diameter (Remember, 4" wheels without screw holes are actually 4.125!)
             450)
     {

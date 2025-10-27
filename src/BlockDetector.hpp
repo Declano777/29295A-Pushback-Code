@@ -67,6 +67,10 @@ public:
         return trapDoorTimer;
     }
 
+    bool GetBadColour() {
+        return badColour;
+    }
+
     void SetAllianceAsRed(bool isRed) {
         allianceColourRed = isRed;
     }

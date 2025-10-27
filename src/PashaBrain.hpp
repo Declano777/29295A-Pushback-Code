@@ -13,11 +13,11 @@ private:
     PashaController Controller_;
 
     //piston boolean values
-    //bool TrapDoorOn_ = false;
     bool DeScoreOn_ = false;
     bool DoubleParkOn_ = false;
     bool WingsOn_ = false;
     bool MatchLoadOn_ = false;
+    bool prerollerOnly_ = false;
     //arm timer 
     /*
     int ZeroTimer = 0;
@@ -39,7 +39,9 @@ public:
 
         MogoOn_ = Robot_->Mogo_.GetValue(); */
     }
-
+    void Vibrate() {
+        Controller_.Vibrate();
+    }
     void Tick()
     {
         //inputs 
@@ -53,8 +55,10 @@ public:
         //
         //intake
         //
-
-        if (Controller_.R2_.IsPressed()) {
+        if (Controller_.Right_.IsPressed()) {
+            Robot_->Intake_.PreRollForward();
+        }
+        else if (Controller_.R2_.IsPressed()) {
             Robot_->Intake_.Forward();
         }
         else if (Controller_.R1_.IsPressed()) {
@@ -69,11 +73,9 @@ public:
         if (Controller_.L1_.WasTapped()) {
             MatchLoadOn_ = !MatchLoadOn_; 
         }
-        if (Controller_.X_.IsOn()) {
-            Robot_->TrapDoor_.SortOn();
-        }
-        else {
-            Robot_->TrapDoor_.SortOff();
+        if (Controller_.X_.WasTapped()) {
+            Robot_->TrapDoor_.ToggleSort(); // for manual control of colour sort
+            Controller_.Vibrate(); 
         }
 
         #pragma region Arm Control - Disabled
@@ -182,8 +184,8 @@ public:
         if (Controller_.Down_.WasTapped()) {
             DoubleParkOn_ = !DoubleParkOn_;
         }
-        if (Controller_.Right_.WasTapped()) {
-            Robot_->TrapDoor_.Toggle(); // for manual control of colour sort 
+        if (Controller_.A_.WasTapped()) {
+           Robot_->TrapDoor_.Toggle(); // for manual control of colour sort 
         }
         if (Controller_.Up_.WasTapped()) {
             Robot_->HalfSpeed = !Robot_->HalfSpeed; // if we need half speed for some reason
@@ -193,6 +195,7 @@ public:
         Robot_->Wings_.SetValue(WingsOn_);
         Robot_->Descore_.SetValue(DeScoreOn_);
         Robot_->DoublePark_.SetValue(DoubleParkOn_);
+        Robot_->MatchLoad_.SetValue(MatchLoadOn_);
         Robot_->OutputTick();
     }
 };
